@@ -1,6 +1,10 @@
+import nest_asyncio
+nest_asyncio.apply()
+
 import streamlit as st
 from dotenv import load_dotenv
 import os
+import shutil # Import shutil for the cleanup logic
 
 # --- Our Custom Modules ---
 from core.utils import clone_repo
@@ -24,8 +28,14 @@ st.set_page_config(
 # Load our custom stylesheet
 load_css("static/style.css")
 
-# --- UI Rendering ---
+# --- Initialize Session State ---
+# This is crucial for remembering the pipeline and the path of the last repo
+if 'rag_pipeline' not in st.session_state:
+    st.session_state.rag_pipeline = None
+if 'last_repo_path' not in st.session_state:
+    st.session_state.last_repo_path = None
 
+# --- UI Rendering ---
 st.title("CodeNavigator AI 🧭")
 st.markdown("##### Chat with any public GitHub repository using the power of Retrieval-Augmented Generation.")
 
@@ -36,11 +46,25 @@ with st.container():
     if st.button("Analyze Repository", key="analyze_button"):
         if repo_url:
             with st.spinner("Analyzing repository... This may take a few minutes for large repos."):
+                
+                # --- NEW CLEANUP LOGIC ---
+                # Clean up the directory from the PREVIOUS run, if it exists.
+                # This prevents old temp folders from piling up.
+                if st.session_state.last_repo_path and os.path.exists(st.session_state.last_repo_path):
+                    print(f"Cleaning up previous directory: {st.session_state.last_repo_path}")
+                    shutil.rmtree(st.session_state.last_repo_path, ignore_errors=True)
+                # --- END NEW CLEANUP LOGIC ---
+
                 try:
+                    # The clone_repo function now returns a NEW, UNIQUE path each time
                     repo_path = clone_repo(repo_url)
+                    # Store this new path so we can clean it up on the NEXT run
+                    st.session_state.last_repo_path = repo_path 
+                    
                     pipeline = RAGPipeline(repo_path=repo_path)
                     pipeline.initialize()
-                    st.session_state.rag_pipeline = pipeline # Store pipeline in session state
+                    
+                    st.session_state.rag_pipeline = pipeline # Store the new pipeline in session state
                     st.success("Repository analyzed successfully! You can now ask questions below.")
                 except Exception as e:
                     st.error(f"An error occurred: {e}")
@@ -48,11 +72,8 @@ with st.container():
             st.warning("Please enter a GitHub repository URL.")
 
 # --- Question Answering Interface ---
-
-# This section only appears after the pipeline has been successfully initialized
-if 'rag_pipeline' in st.session_state and st.session_state.rag_pipeline is not None:
+if st.session_state.rag_pipeline:
     st.markdown("---")
-    
     question = st.text_input("Ask a question about the codebase:", placeholder="e.g., How is the RetrievalQA chain implemented?")
 
     if question:

@@ -1,15 +1,9 @@
-# Core libraries for building the RAG system
 langchain
-langchain-openai
+langchain-google-genai
 langchain-community
 chromadb
 tiktoken
-
-# For cloning the GitHub repository
 GitPython
-
-# For loading environment variables
 python-dotenv
-
-# For building the web interface
 streamlit
+nest_asyncio

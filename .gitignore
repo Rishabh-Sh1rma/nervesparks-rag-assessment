@@ -13,3 +13,5 @@ __pycache__/
 # Virtual environment folder
 venv/
 *.venv
+
+temp_repo_*
