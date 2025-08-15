@@ -21,7 +21,7 @@ I highly recommend watching this 3-minute video where I explain the project's ar
 
 Or, you can interact with the live, deployed application yourself:
 
-🚀 **[Try the Live Application Here (Link to Deployed App)]** 🚀
+🚀 **[Try the Live Application Here ([Link to Deployed App](https://huggingface.co/spaces/Rishabh-Sh1rma/CodeNavigatorAI))]** 🚀
 
 ---
 
