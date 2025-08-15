@@ -13,15 +13,20 @@ This project is my implementation of a Retrieval-Augmented Generation (RAG) syst
 
 ---
 
-### 🎥 Live Demo & Video Walkthrough
+### 🎥 Live Demo Walkthrough
 
-I recorded a short video to walk you through the project's architecture, my key technical decisions, and a live demonstration of the app. I highly recommend giving it a watch!
-
-➡️ **[Watch the Video Walkthrough Here (Link to Loom or YouTube)]** ⬅️
-
-You can also interact with the live, deployed application yourself:
+🚀 Live Demo & How to Use
+You can interact with the live, deployed application here:
 
 🚀 **[Try the Live Application Here](https://huggingface.co/spaces/Rishabh-Sh1rma/CodeNavigatorAI)** 🚀
+
+Quick Start Guide:
+
+Paste a URL: Copy the URL of any public GitHub repository and paste it into the input box.
+
+Analyze: Click the 'Analyze Repository' button and wait for the confirmation message.
+
+Ask Questions: Once the analysis is complete, you can ask any question about the codebase in the second input box.
 
 ---
 
@@ -39,8 +44,7 @@ You can also interact with the live, deployed application yourself:
 
 I designed the architecture to be a classic, effective RAG pipeline. Here’s a step-by-step breakdown of how it functions, from input to answer:
 
-![Project Architecture Diagram](https://i.imgur.com/your-image-url.png) 
-*(**Instruction:** You'll need to upload the diagram image to a service like Imgur and paste the direct image link here.)*
+![Project Architecture Diagram](https://ibb.co/Hfmk0PDg) 
 
 1.  **Ingestion & Processing (The "Large Corpus"):** The process starts when a user provides a GitHub URL. My application clones the entire repository locally.
 2.  **Chunking & Embedding:** I wrote a parser that intelligently walks through the repository, ignoring irrelevant files. It reads the content of valid source code and documentation files and breaks them down into smaller, meaningful "chunks." Each chunk is then converted into a numerical representation (an embedding) using a Google AI model.
