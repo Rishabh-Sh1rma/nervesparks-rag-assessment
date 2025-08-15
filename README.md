@@ -44,7 +44,7 @@ Ask Questions: Once the analysis is complete, you can ask any question about the
 
 I designed the architecture to be a classic, effective RAG pipeline. Here’s a step-by-step breakdown of how it functions, from input to answer:
 
-![Project Architecture Diagram](https://ibb.co/Hfmk0PDg) 
+![Project Architecture Diagram](<img width="1588" height="505" alt="image" src="https://github.com/user-attachments/assets/c7b6d966-ce86-412d-898c-d1c92b621177" />) 
 
 1.  **Ingestion & Processing (The "Large Corpus"):** The process starts when a user provides a GitHub URL. My application clones the entire repository locally.
 2.  **Chunking & Embedding:** I wrote a parser that intelligently walks through the repository, ignoring irrelevant files. It reads the content of valid source code and documentation files and breaks them down into smaller, meaningful "chunks." Each chunk is then converted into a numerical representation (an embedding) using a Google AI model.
