@@ -1,3 +1,12 @@
+---
+title: CodeNavigatorAI
+emoji: 🧭
+colorFrom: indigo
+colorTo: blue
+sdk: streamlit
+app_file: app.py
+---
+
 # CodeNavigator AI 🧭 - Nervesparks Developer Assessment
 
 An AI-powered RAG system that ingests any public GitHub repository and allows a user to ask questions about the codebase. This project demonstrates a full-stack approach to building modern AI applications, focusing on robust backend logic and a polished user experience.
